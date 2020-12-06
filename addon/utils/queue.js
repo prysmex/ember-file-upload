@@ -58,34 +58,18 @@ export default EmberObject.extend(WithFiles, {
     let disabled = get(this, "disabled");
     let files = [];
 
-    function onFileAdd(file) {
-      if(onfileadd) {
-        next(onfileadd, file);
-      }
-    }
-    
     if (!disabled) {
-      files = this.addFiles(fileList, source, onFileAdd);
-    }
+      for (let i = 0, len = fileList.length || fileList.size; i < len; i++) {
+        let fileBlob = fileList.item ? fileList.item(i) : fileList[i];
+        if (fileBlob instanceof Blob) {
+          let file = File.fromBlob(fileBlob, source);
 
-    return files;
-  },
+          files.push(file);
+          this.push(file);
 
-  /**
-    @method addFiles
-    @param {File[]} fileList an array of Files
-   */
-  addFiles(fileList, source, callback = (_file) => {}) {
-    let files = [];
-    for (let i = 0, len = fileList.length || fileList.size; i < len; i++) {
-      let fileBlob = fileList.item ? fileList.item(i) : fileList[i];
-      if (fileBlob instanceof Blob) {
-        let file = File.fromBlob(fileBlob, source);
-
-        files.push(file);
-        this.push(file);
-        if (typeOf(callback) === "function") {
-          callback(file);
+          if (onfileadd) {
+            next(onfileadd, file);
+          }
         }
       }
     }
