@@ -4,10 +4,10 @@ import { DEBUG } from '@glimmer/env';
 
 import { assert } from '@ember/debug';
 import EmberObject, { set, get, computed } from '@ember/object';
-import FileReader from './system/file-reader';
-import HTTPRequest from './system/http-request';
+import FileReader from '../system/file-reader';
+import HTTPRequest from '../system/http-request';
 import RSVP from 'rsvp';
-import uuid from './system/uuid';
+import uuid from '../system/uuid';
 
 const { reads } = computed;
 

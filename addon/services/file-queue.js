@@ -3,7 +3,7 @@ import { A } from '@ember/array';
 import Service from '@ember/service';
 import { set, get } from '@ember/object';
 import { once } from '@ember/runloop';
-import Queue from '../queue';
+import Queue from '../utils/queue';
 import WithFiles from '../mixins/with-files';
 
 /**
